@@ -6,7 +6,7 @@
 /*   By: gmeda <gmeda@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/22 17:20:42 by gmeda             #+#    #+#             */
-/*   Updated: 2020/01/23 16:24:09 by gmeda            ###   ########.fr       */
+/*   Updated: 2020/02/14 17:47:14 by gmeda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,6 @@ void			read_file(char *file_name, t_fdf *data)
 		free(line);
 		i++;
 	}
+	free(line);
 	close(fd);
 }

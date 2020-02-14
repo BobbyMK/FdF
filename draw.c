@@ -6,7 +6,7 @@
 /*   By: gmeda <gmeda@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/22 17:20:39 by gmeda             #+#    #+#             */
-/*   Updated: 2020/01/23 17:13:04 by gmeda            ###   ########.fr       */
+/*   Updated: 2020/02/14 16:39:50 by gmeda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,7 @@ void		zoom_n_shift(float *d, t_fdf *map)
 	d[2] += map->shift_y;
 	d[3] += map->shift_x;
 	d[4] += map->shift_y;
-	//map->color = (z || z1) ? 0xff0000 : 0xe0ffff;
-	if (z || z1)
-	{
-		((z / map->z_scale) > 9) ? map->color =  0xffffff : 0;
-		((z / map->z_scale) > 1 && (z / map->z_scale) <= 9) ? map->color =  0x8b4513 : 0;
-	}
-	else
-		map->color = 0x006400;
+	map->color = (z || z1) ? 0x0000ff : 0x000080;
 }
 
 void		bresenham(float *s, t_fdf *map)
