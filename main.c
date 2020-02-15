@@ -6,7 +6,7 @@
 /*   By: gmeda <gmeda@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/22 17:20:44 by gmeda             #+#    #+#             */
-/*   Updated: 2020/01/14 17:27:01 by gmeda            ###   ########.fr       */
+/*   Updated: 2020/02/15 21:34:21 by gmeda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,42 @@ int		input_key(int key, t_fdf *map)
 	return (0);
 }
 
+void	ft_error(char *str)
+{
+	if (ft_strcmp(str, "map") == 0)
+		ft_putendl("Map error");
+	else if (ft_strcmp(str, "args") == 0)
+		ft_putendl("Wrong arguments");
+	else if (ft_strcmp(str, "file") == 0)
+		ft_putendl("File error");
+	else
+		ft_putendl("error");
+	exit(EXIT_FAILURE);
+}
+
+// int		is_valid(char *line)
+// {
+// 	int		i;
+	
+// 	i = -1;
+// 	 while (line[i++] != '\0')
+// 	 	if ((line[i] < '0' || line[i] > '9') && line[i] != '\n' && line[i] != ' ' && line[i] != '-')
+// 	 		ft_error("map");
+// 	return (1);
+// }
+
 int		main(int ac, char **av)
 {
 	t_fdf	*map;
 
 	if (ac == 2)
 	{
+		(!(av[1])) ? ft_error("args") : 0;
 		map = (t_fdf*)malloc(sizeof(t_fdf));
 		read_file(av[1], map);
 		map->mlx_ptr = mlx_init();
 		map->angle = 0.53;
-		map->z_scale = 1;
+		map->z_scale = 3;
 		map->w_x = 2000;
 		map->w_y = 1300;
 		map->win_ptr = mlx_new_window(map->mlx_ptr, map->w_x, map->w_y, "FDF");
@@ -60,6 +85,6 @@ int		main(int ac, char **av)
 		mlx_loop(map->mlx_ptr);
 	}
 	else
-		ft_putendl_fd("Usage: ./fdf [File]", 2);
+		ft_error("args");
 	return (0);
 }

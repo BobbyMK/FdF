@@ -6,7 +6,7 @@
 /*   By: gmeda <gmeda@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/22 17:20:42 by gmeda             #+#    #+#             */
-/*   Updated: 2020/02/14 17:47:14 by gmeda            ###   ########.fr       */
+/*   Updated: 2020/02/15 21:32:35 by gmeda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int				digit_counter(char *line, char c)
 		{
 			count++;
 			while (*line && *line != c)
-				line++;
+				((*line < '0' || *line > '9') && *line != '\n' && *line != ' ' && *line != '-') ? ft_error("map") : line++;
 		}
 	}
 	return (count);
@@ -39,6 +39,7 @@ int				get_width(char *file_name)
 
 	width = 0;
 	fd = open(file_name, O_RDONLY, 0);
+	(fd != 3) ? ft_error("file") : 0;
 	while (get_next_line(fd, &line))
 	{
 		width++;
@@ -92,7 +93,7 @@ void			read_file(char *file_name, t_fdf *data)
 		data->height_matrix[i++] = (int*)malloc(sizeof(int) * (data->x + 1));
 	i = 0;
 	fd = open(file_name, O_RDONLY, 0);
-	while (get_next_line(fd, &line) && i != data->y)
+	while (get_next_line(fd, &line) && i != data->y/* && is_valid(line, data->x*/)
 	{
 		matrix(data->height_matrix[i], line);
 		free(line);
