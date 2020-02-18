@@ -6,7 +6,7 @@
 #    By: gmeda <gmeda@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/25 18:09:59 by gmeda             #+#    #+#              #
-#    Updated: 2020/01/14 20:22:58 by gmeda            ###   ########.fr        #
+#    Updated: 2020/02/18 20:57:24 by gmeda            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ INCLUDES=libft/libft.a minilibx_macos/libmlx.a
 all:
 	@make -C libft/ all
 	@make -C minilibx_macos/ all
-	gcc $(SRC) -g -o $(NAME) $(FLAGS) $(INCLUDES) $(FRAMEWORKS)
+	gcc $(SRC) -o $(NAME) $(FLAGS) $(INCLUDES) $(FRAMEWORKS)
 
 clean:
 	@make -C libft/ clean

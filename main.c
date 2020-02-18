@@ -6,7 +6,7 @@
 /*   By: gmeda <gmeda@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/22 17:20:44 by gmeda             #+#    #+#             */
-/*   Updated: 2020/02/15 21:34:21 by gmeda            ###   ########.fr       */
+/*   Updated: 2020/02/18 21:13:24 by gmeda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int		input_key(int key, t_fdf *map)
 	(key == 125) ? map->shift_y -= map->zoom / 2 : 0;
 	(key == 123) ? map->shift_x += map->zoom / 2 : 0;
 	(key == 124) ? map->shift_x -= map->zoom / 2 : 0;
-	(key == 69) ? map->zoom += 10 : 0;
-	(key == 78 && map->zoom > 10) ? map->zoom -= 10 : 0;
+	(key == 69) ? map->zoom += 5 : 0;
+	(key == 78 && map->zoom > 5) ? map->zoom -= 5 : 0;
 	(key == 86) ? map->angle -= 0.05 : 0;
 	(key == 88) ? map->angle += 0.05 : 0;
 	(key == 91) ? map->z_scale += 1 : 0;
@@ -29,9 +29,10 @@ int		input_key(int key, t_fdf *map)
 	if (key == 49)
 	{
 		map->angle = 0.5326;
-		map->z_scale = 1;
+		map->z_scale = 4;
 		map->shift_x = 700;
 		map->shift_y = 400;
+		map->zoom = 20;
 	}
 	mlx_clear_window(map->mlx_ptr, map->win_ptr);
 	draw(map);
@@ -51,17 +52,6 @@ void	ft_error(char *str)
 	exit(EXIT_FAILURE);
 }
 
-// int		is_valid(char *line)
-// {
-// 	int		i;
-	
-// 	i = -1;
-// 	 while (line[i++] != '\0')
-// 	 	if ((line[i] < '0' || line[i] > '9') && line[i] != '\n' && line[i] != ' ' && line[i] != '-')
-// 	 		ft_error("map");
-// 	return (1);
-// }
-
 int		main(int ac, char **av)
 {
 	t_fdf	*map;
@@ -73,11 +63,11 @@ int		main(int ac, char **av)
 		read_file(av[1], map);
 		map->mlx_ptr = mlx_init();
 		map->angle = 0.53;
-		map->z_scale = 3;
+		map->z_scale = 4;
 		map->w_x = 2000;
 		map->w_y = 1300;
 		map->win_ptr = mlx_new_window(map->mlx_ptr, map->w_x, map->w_y, "FDF");
-		map->zoom = 50;
+		map->zoom = 25;
 		map->shift_x = 700;
 		map->shift_y = 400;
 		draw(map);

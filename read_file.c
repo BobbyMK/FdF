@@ -6,7 +6,7 @@
 /*   By: gmeda <gmeda@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/22 17:20:42 by gmeda             #+#    #+#             */
-/*   Updated: 2020/02/15 21:32:35 by gmeda            ###   ########.fr       */
+/*   Updated: 2020/02/18 20:56:07 by gmeda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ int				digit_counter(char *line, char c)
 		{
 			count++;
 			while (*line && *line != c)
-				((*line < '0' || *line > '9') && *line != '\n' && *line != ' ' && *line != '-') ? ft_error("map") : line++;
+				((*line < '0' || *line > '9') && *line != '\n' &&
+					*line != ' ' && *line != '-') ? ft_error("map") : line++;
 		}
 	}
 	return (count);
@@ -36,17 +37,19 @@ int				get_width(char *file_name)
 	int			fd;
 	char		*line;
 	int			width;
+	int			map_error;
 
 	width = 0;
 	fd = open(file_name, O_RDONLY, 0);
 	(fd != 3) ? ft_error("file") : 0;
 	while (get_next_line(fd, &line))
 	{
+		map_error = digit_counter(line, ' ');
 		width++;
 		free(line);
 	}
 	close(fd);
-	return (width);
+	return (width - 1);
 }
 
 int				get_length(char *file_name)
@@ -93,7 +96,7 @@ void			read_file(char *file_name, t_fdf *data)
 		data->height_matrix[i++] = (int*)malloc(sizeof(int) * (data->x + 1));
 	i = 0;
 	fd = open(file_name, O_RDONLY, 0);
-	while (get_next_line(fd, &line) && i != data->y/* && is_valid(line, data->x*/)
+	while (get_next_line(fd, &line) && i != data->y)
 	{
 		matrix(data->height_matrix[i], line);
 		free(line);
